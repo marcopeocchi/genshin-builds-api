@@ -1,0 +1,20 @@
+{
+  "name": "genshin-builds",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./api/app.js",
+  "scripts": {
+    "start": "node ./api/app.js",
+    "dev": "nodemon ./api/app.js",
+    "test": "node tests.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@koa/router": "^10.1.1",
+    "dotenv": "^16.0.0",
+    "koa": "^2.13.4",
+    "mysql": "^2.18.1",
+    "node-cron": "^3.0.0"
+  }
+}

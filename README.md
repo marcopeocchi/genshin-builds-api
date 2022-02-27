@@ -8,10 +8,12 @@ https://docs.google.com/spreadsheets/d/1gNxZ2xab1J6o1TuNVWMeLOZ7TPOqrsf3SshP5DLv
 
 This is only JSON API I'm not involved in making the builds, all the credits goes to the respective creators.
 
+currently it's availbe here: https://genshin-impact-builds.herokuapp.com/
+
 ## Usage
 
 ```
-    curl http://localhost:3000/pyro
+    curl https://genshin-impact-builds.herokuapp.com/builds/pyro
 ```
 sample:
 ```json

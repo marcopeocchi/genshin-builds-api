@@ -124,7 +124,7 @@ async function getBuildsByElement(element) {
                 response.push({
                     name: String(res[offsets[i]][1]).toLowerCase().trim(),
                     builds: buildsBuff,
-                    notes: notes,
+                    notes: '',
                 });
             }
 

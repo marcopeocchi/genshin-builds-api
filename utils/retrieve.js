@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 const https = require('https');
 
 const key = process.env.API_KEY;
@@ -43,7 +43,7 @@ async function getBuildsByElement(element) {
                     if (!data.error) {
                         resolve(data.values);
                     }
-                    reject(data.error)
+                    reject(data.error);
                 }
                 catch (err) {
                     reject(err);
@@ -73,7 +73,7 @@ async function getBuildsByElement(element) {
                 // calculate the offset between sections
                 if (res[i].length === 9) {
                     if (res[i][2] === 'ROLE') {
-                        offsets.push(i)
+                        offsets.push(i);
                     }
                 }
             }
@@ -89,7 +89,7 @@ async function getBuildsByElement(element) {
                 }
                 // generate the sub-array / silce
                 const builds = res.slice(offsets[i] + 2, offsets[i] + 2 + nBuilds);
-                const notes = res.slice(-1);
+                const notes = res.slice(-1).filter(n => n).filter(n => n != '');
                 // buffer for the intermediate output
                 const buildsBuff = [];
                 // generate the build by role
@@ -104,26 +104,28 @@ async function getBuildsByElement(element) {
                             role: role
                                 .replace('✩', '')
                                 .replace('\n', '')
-                                .toLocaleLowerCase()
+                                .toLowerCase()
                                 .trim(),
                             equipment: equipment
-                                //.replace(/^[0-9]$|^[1-9][0-9]$|^. /gm, '')
+                                .replace(/(\d{1,2}\.)/gm, '')
                                 .split('\n')
-                                .filter(x => x),
+                                .filter(e => e)
+                                .map(a => a.trim()),
                             artifacts: artifacts
-                                //.replace(/^[0-9]$|^[1-9][0-9]$|^. /gm, '')
+                                .replace(/(\d{1,2}\.)/gm, '')
                                 .split('\n')
-                                .filter(x => x),
+                                .filter(a => a)
+                                .map(a => a.trim()),
                             optimal: role.includes('✩')
-                        })
+                        });
                     }
                 }
                 // each object is composed by name and the array of the relative builds
                 response.push({
-                    name: String(res[offsets[i]][1]).toLocaleLowerCase().trim(),
+                    name: String(res[offsets[i]][1]).toLowerCase().trim(),
                     builds: buildsBuff,
                     notes: notes,
-                })
+                });
             }
 
             // if there is output try to resolve the promise, alternatively reject it
